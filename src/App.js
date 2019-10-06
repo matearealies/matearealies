@@ -1,26 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { useRoutes } from 'hookrouter';
+import { Mattereal, Cookie } from './components/Mattereal';
+import Magazine from './components/Magazine/Magazine';
+import Reader from './components/Stash/Reader';
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  // const routes = {
+  //   '/': () => <Magazine />,
+  //   '/cookie': () => <Cookie />,
+  //   '/mattereal': () => <Mattereal />,  
+  //   '/reader': () => <Reader />
+  // };
+  
+  // const routeResult = useRoutes(routes);
+    
+  // return routeResult; 
+  return (<Magazine />)
 }
 
 export default App;

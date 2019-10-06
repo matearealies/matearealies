@@ -1,0 +1,2 @@
+export { Magazine } from './Magazine'
+
