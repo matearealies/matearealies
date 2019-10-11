@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8af812c136c47ac5c644a066a4ad5bfe",
+    "revision": "64c54310e4156d401e492840bc9f5741",
     "url": "/matearealies/index.html"
   },
   {
-    "revision": "e3d466ec569fb4a5ecdd",
+    "revision": "822c375510284e4399fe",
     "url": "/matearealies/static/css/main.fbe00f30.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/matearealies/static/js/2.869cb7e6.chunk.js"
   },
   {
-    "revision": "e3d466ec569fb4a5ecdd",
-    "url": "/matearealies/static/js/main.a4443119.chunk.js"
+    "revision": "822c375510284e4399fe",
+    "url": "/matearealies/static/js/main.97c8919e.chunk.js"
   },
   {
     "revision": "4fa57ff91e5f9721b025",
