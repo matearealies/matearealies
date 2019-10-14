@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { mdiConsole } from '@mdi/js';
 import Draggable from 'react-draggable';
 import Icon from '@mdi/react';
+import TerminalInReact from 'terminal-in-react';
 
 function PaperComponent(props) {
     return (
@@ -35,7 +36,7 @@ const steps = [
     },
   ];
 
-export function Chat (props) {
+export function Terminal (props) {
     const classes = useStyles();   
     
     const [open, setOpen] = React.useState(false);
@@ -47,7 +48,7 @@ export function Chat (props) {
     const handleClose = () => {
         setOpen(false);
     };
-
+    const showMsg = () => 'Hello World'
     return (    
         <div>
             <Fab color="primary" aria-label="chat" className={classes.fab} onClick={handleClickOpen}>
@@ -64,9 +65,34 @@ export function Chat (props) {
                 aria-labelledby="draggable-dialog-title"
             >
                 <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-                Subscribe
+                Terminal
                 </DialogTitle>
                 <DialogContent className={classes.dialogContent}>
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        height: "100vh"
+                        }}
+                    >
+                        <TerminalInReact
+                            color='green'
+                            backgroundColor='black'
+                            barColor='black'
+                            style={{ fontWeight: "bold", fontSize: "1em" }}
+                            commands={{
+                                'open-google': () => window.open('https://www.google.com/', '_blank'),
+                                showmsg: showMsg,
+                                popup: () => alert('Terminal in React')
+                            }}
+                            descriptions={{
+                                'open-google': 'opens google.com',
+                                showmsg: 'shows a message',
+                                alert: 'alert', popup: 'alert'
+                            }}
+                            msg='shes a queen of diamonds' 
+                        />
+                    </div>
                 <DialogContentText>
                     
                 </DialogContentText>

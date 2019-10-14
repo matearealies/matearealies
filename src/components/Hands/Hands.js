@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { bubble as Menu, slide as MenuL } from 'react-burger-menu'
-import { Chat, Matterealize, Teacher } from '../Digits';
+import { Terminal, Matterealize, Teacher } from '../Digits';
 
 
 function Hands (props) {
@@ -116,7 +116,7 @@ function Hands (props) {
         </MenuL>
         <Menu right styles={ styles2 } isOpen={menuOpen} handleStateChange={menuOpen} >
           <Matterealize handleMatterealize={handleMatterealize} />
-          <Chat />
+          <Terminal />
           <Teacher />
         </Menu>
       </div>

@@ -1,3 +1,3 @@
 export { Matterealize } from './Matterealize'
 export { Teacher } from './Teacher'
-export { Chat } from './Chat'
+export { Terminal } from './Terminal'

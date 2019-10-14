@@ -18,6 +18,7 @@
     "react-dom": "^16.9.0",
     "react-draggable": "^4.0.3",
     "react-muuri": "^0.3.0",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.1.1",
     "streamsaver": "^2.0.3",
     "terminal-in-react": "^4.3.1"

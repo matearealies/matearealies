@@ -25,21 +25,40 @@ d88' d88'  88b`?88P'`88b  `?8b    `?8b  `?888P'd88'     `?888P'`?88P'`88b  8*/
 export function Mattereal(props) {
   const { load } = props;
   const [idx, setIdx] = useState(0)
+  const [pp, setPP] = useState(0)
   const classes = useStyles();
+
+  function onClick () {    
+    console.log(pp, idx)
+    if (pp > idx) {
+      console.log('pp: ', pp)
+      console.log('idx: ', idx)
+      console.log('load.length: ', load.length)
+      setIdx(load.length > idx + 1 ? idx + 1 : 0)      
+    }
+  }
+
+  function handlePP(plus) {
+    if (pp > idx) {
+      setPP(0)
+    }
+    else {
+      setPP(pp + plus + 2)
+    }    
+  }
   return (
     <>
       <Grid container justify = "center" style={{ position: 'fixed', pointerEvents: 'none'}} >
-        <Cookie>
+        <Cookie handlePP={handlePP}>
           <Card >
           <CardActionArea>
             <CardMedia 
               className={classes.card}
               component="img"
-              alt="gift"
               image={load[idx]}
-              onClick={(e) => { setIdx(load.length > idx + 1 ? idx + 1 : 0)}}
+              onClick={(e) => { onClick() }}
               src={load[idx]}
-              title="gift"
+              onError={() => {setIdx(load.length > idx + 1 ? idx + 1 : 0)}}
             />
           </CardActionArea>
           </Card>`

@@ -1,23 +1,18 @@
 import React from 'react';
 import './App.css';
-import { useRoutes } from 'hookrouter';
-import { Mattereal, Cookie } from './components/Mattereal';
+import { HashRouter, Route, Switch } from "react-router-dom";
 import Magazine from './components/Magazine/Magazine';
-import Reader from './components/Stash/Reader';
-
+import { CreampieCathy } from './components/Sites'
 
 function App() {
-  // const routes = {
-  //   '/': () => <Magazine />,
-  //   '/cookie': () => <Cookie />,
-  //   '/mattereal': () => <Mattereal />,  
-  //   '/reader': () => <Reader />
-  // };
-  
-  // const routeResult = useRoutes(routes);
-    
-  // return routeResult; 
-  return (<Magazine />)
+  return (
+    <HashRouter basename='/'>
+      <Switch>
+        <Route exact path="/" component={Magazine} />
+        <Route path="/creampieCathy" component={CreampieCathy} />
+      </Switch>      
+    </HashRouter>
+  )
 }
 
 export default App;

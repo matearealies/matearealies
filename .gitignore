@@ -10,7 +10,8 @@
 
 # production
 /build
-/data
+/src/data
+/src/components/Sites
 
 # misc
 .DS_Store
