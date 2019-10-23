@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/matearealies/static/css/main.fbe00f30.chunk.css",
-    "main.js": "/matearealies/static/js/main.a651392a.chunk.js",
-    "main.js.map": "/matearealies/static/js/main.a651392a.chunk.js.map",
+    "main.js": "/matearealies/static/js/main.d0d95973.chunk.js",
+    "main.js.map": "/matearealies/static/js/main.d0d95973.chunk.js.map",
     "runtime~main.js": "/matearealies/static/js/runtime~main.4ed8a5bc.js",
     "runtime~main.js.map": "/matearealies/static/js/runtime~main.4ed8a5bc.js.map",
-    "static/js/2.552eb8a0.chunk.js": "/matearealies/static/js/2.552eb8a0.chunk.js",
-    "static/js/2.552eb8a0.chunk.js.map": "/matearealies/static/js/2.552eb8a0.chunk.js.map",
+    "static/js/2.5a1f4e1d.chunk.js": "/matearealies/static/js/2.5a1f4e1d.chunk.js",
+    "static/js/2.5a1f4e1d.chunk.js.map": "/matearealies/static/js/2.5a1f4e1d.chunk.js.map",
     "index.html": "/matearealies/index.html",
-    "precache-manifest.37fc701d136fda85eac38f18f4ae6a1f.js": "/matearealies/precache-manifest.37fc701d136fda85eac38f18f4ae6a1f.js",
+    "precache-manifest.2f4f8c97de72ed1a53c7ba8f8d062db5.js": "/matearealies/precache-manifest.2f4f8c97de72ed1a53c7ba8f8d062db5.js",
     "service-worker.js": "/matearealies/service-worker.js",
     "static/css/main.fbe00f30.chunk.css.map": "/matearealies/static/css/main.fbe00f30.chunk.css.map"
   }
