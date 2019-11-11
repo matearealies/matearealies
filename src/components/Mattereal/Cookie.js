@@ -6,12 +6,12 @@ import './cookie.css'
 export function Cookie (props) {
     // var x = 0;
     const [pp, setpp] = useState(0)
+
     function handleClick(event) {
         let $div = $(event.target)
         let offset = $div.offset();
         var x = event.clientX - offset.left;
         var y = event.clientY - offset.top;
-        console.log(x, y, $div.width())
         setpp((pp + 1))
         $("#cookie").append('<div id="x'+pp+'" hidden>+1.0</div>');
         $("#x"+pp).css("top", event.clientY);
@@ -24,8 +24,8 @@ export function Cookie (props) {
         $("#x"+pp).css("animation", "GoUp 2s forwards linear");
         $("#x"+pp).show();
         props.handlePP(1);
-    }  
-    
+    } 
+
     return (
         <div id="cookie" onClick={handleClick}>
              {props.children}

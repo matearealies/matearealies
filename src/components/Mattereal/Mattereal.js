@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, useGlobal } from 'reactn'
 import { makeStyles } from '@material-ui/core/styles'
 import { Card, CardActionArea, CardMedia, Grid } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import { Cookie } from './Cookie'
+import { Marker } from '../Marker'
 
 const propTypes = {
   src: PropTypes.string.isRequired,  
@@ -15,26 +16,32 @@ const useStyles = makeStyles({
     width: 'auto',
     height: '100vh', pointerEvents: 'auto'
   },
-})                                                                        /*b 
-                           d8P     d8P                                    88P 
-                        d888888Pd888888P                                 d88  
-  88bd8b,d88b  d888b8b    ?88'    ?88'   d8888b  88bd88b d8888b d888b8b  888  
-  88P'`?8P'?8bd8P' ?88    88P     88P   d8b_,dP  88P'  `d8b_,dPd8P' ?88  ?88  
- d88  d88  88P88b  ,88b   88b     88b   88b     d88     88b    88b  ,88b  88b 
+})                                                                        /*b
+                           d8P     d8P                                    88P
+                        d888888Pd888888P                                 d88
+  88bd8b,d88b  d888b8b    ?88'    ?88'   d8888b  88bd88b d8888b d888b8b  888
+  88P'`?8P'?8bd8P' ?88    88P     88P   d8b_,dP  88P'  `d8b_,dPd8P' ?88  ?88
+ d88  d88  88P88b  ,88b   88b     88b   88b     d88     88b    88b  ,88b  88b
 d88' d88'  88b`?88P'`88b  `?8b    `?8b  `?888P'd88'     `?888P'`?88P'`88b  8*/
 export function Mattereal(props) {
   const { load } = props;
   const [idx, setIdx] = useState(0)
   const [pp, setPP] = useState(0)
   const classes = useStyles();
+  const [markers, setMarkers] = useGlobal('markers');
+  const [selectedMarker, setSelecteMarker] = useGlobal('selectedMarker')  
+  
+  useEffect(() => {
+    // Update the document title using the browser API
+    setMarkers(props.markers)
+  }, [props.markers]);
 
-  function onClick () {    
-    console.log(pp, idx)
+  function onClick () {
     if (pp > idx) {
       console.log('pp: ', pp)
       console.log('idx: ', idx)
       console.log('load.length: ', load.length)
-      setIdx(load.length > idx + 1 ? idx + 1 : 0)      
+      setIdx(load.length > idx + 1 ? idx + 1 : 0)     
     }
   }
 
@@ -44,24 +51,36 @@ export function Mattereal(props) {
     }
     else {
       setPP(pp + plus + 2)
-    }    
+    }
   }
+  const image = load[idx]
   return (
     <>
-      <Grid container justify = "center" style={{ position: 'fixed', pointerEvents: 'none'}} >
-        <Cookie handlePP={handlePP}>
+      <Grid container justify = "center" style={{ position: 'fixed'}} >
+        {markers ? markers.map((marker, index) => {
+          
+          let selected = false
+          if(marker.image === image && selectedMarker === index) {
+            selected = true
+          } else {
+            selected = false
+          }
+          return (
+            <Marker key={index} id={index} image={image} marker={marker} selected={selected} />
+          )}) : ''}
+        <Cookie handlePP={handlePP}>        
           <Card >
           <CardActionArea>
-            <CardMedia 
+            <CardMedia
               className={classes.card}
               component="img"
-              image={load[idx]}
+              image={image}
               onClick={(e) => { onClick() }}
-              src={load[idx]}
+              src={image}
               onError={() => {setIdx(load.length > idx + 1 ? idx + 1 : 0)}}
             />
           </CardActionArea>
-          </Card>`
+          </Card>
         </Cookie>
       </Grid>
     </>

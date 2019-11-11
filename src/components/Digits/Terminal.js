@@ -6,6 +6,8 @@ import Draggable from 'react-draggable';
 import Icon from '@mdi/react';
 import TerminalInReact from 'terminal-in-react';
 
+
+
 function PaperComponent(props) {
     return (
       <Draggable cancel={'[class*="MuiDialogContent-root"]'}>
