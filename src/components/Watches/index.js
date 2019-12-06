@@ -1,1 +1,1 @@
-export { WatchTeacher } from './WatchTeacher'
+export { Marker } from './Marker'

@@ -1,29 +1,12 @@
-import React, { useEffect, useGlobal } from 'reactn';
+import React, { useEffect, useGlobal, useLayoutEffect, useState, useRef  } from 'reactn';
 import { makeStyles } from '@material-ui/core/styles';
-import posed from 'react-pose';
-
-
+import { motion } from 'framer-motion'
  /*:=======  :::====  :::====  :::  === :::===== :::==== 
  ::: === === :::  === :::  === ::: ===  :::      :::  ===
  === === === ======== =======  ======   ======   ======= 
  ===     === ===  === === ===  === ===  ===      === === 
  ===     === ===  === ===  === ===  === ======== ===  =*/                                                                                                                
 export function Marker(props) {
-    console.log('alens')
-    const Box = posed.div({
-        draggable: true,
-        init: { scale: 1 },
-        // alignItems: 'center',
-        // drag: { scale: 1.1 },
-        // dragEnd: { scale: 1 },
-        
-    })
-    
-    const Label = posed.span({
-        init: { color: '#000' },
-        drag: { color: '#f00' }                               
-    })
-
     const useStyles = makeStyles(theme => ({    
         root: {
             color: '#fff',
@@ -39,7 +22,7 @@ export function Marker(props) {
         box: {
             width: props.marker.width,
             height: props.marker.height,
-            borderRadius: '100%',
+            // borderRadius: '100%',
             background: '#fff',
             alignItems: 'center',
             justifyContent: 'center',
@@ -62,29 +45,44 @@ export function Marker(props) {
     // >3407-1337
     
     
-
-    function onDragEnd(event) {              
+    function onDragEnd(event, info) {    
+        console.log(event, info)       
         const marker = markers[id]
         marker.id = id
         marker.pageX = event.pageX
         marker.pageY = event.pageY
         marker.image = image
-        setSelectedMarker(id)        
+        setSelectedMarker(id)          
     }
     
+    const style = props.marker.pageX
+        ? { 
+            borderStyle: selected ? 'solid' : 'none', 
+            borderColor: '#e91e63',   
+            borderRadius: 37,   
+            // borderRadius: '100%',                           
+            // left: props.marker.pageX - (props.marker.width/2), 
+            // top: props.marker.pageY - (props.marker.height/2) 
+        } : { 
+            borderStyle: selected ? 'solid' : 'none', 
+            borderColor: '#e91e63',
+            borderRadius: 37,
+            // borderRadius: '100%',                                 
+        }
     return (
-        // <DraggableCircle r={3} />
-        <Box 
-            className={classes.box} 
-            id={id} 
-            style={{ 
-                borderStyle: selected ? 'solid' : 'none', 
-                borderColor: '#e91e63', 
-                left: props.marker.pageX - (props.marker.width/2), 
-                top: props.marker.pageY - (props.marker.height/2) }} 
-            onDragEnd={onDragEnd}>
-            <Label className="label">{props.marker.lession}</Label>
-        </Box>
-
+        <>            
+            <motion.button 
+                className={ classes.box } 
+                id={ id } 
+                style={ style } 
+                drag
+                dragConstraints={ props.constraintsRef }    
+                onDragEnd={ onDragEnd }                
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 1.0 }}    
+            >
+                {/* <Label className="label">{props.marker.lession}</Label> */}
+            </motion.button> 
+        </>        
     )
 }

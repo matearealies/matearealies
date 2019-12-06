@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useGlobal } from 'reactn'
+import React, { useEffect, useState, useGlobal, useRef } from 'reactn'
 import { makeStyles } from '@material-ui/core/styles'
 import { Card, CardActionArea, CardMedia, Grid } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import { Cookie } from './Cookie'
-import { Marker } from '../Marker'
+import { Marker } from '../Marker/Marker'
+import { motion } from 'framer-motion';
 
 const propTypes = {
   src: PropTypes.string.isRequired,  
@@ -16,6 +17,15 @@ const useStyles = makeStyles({
     width: 'auto',
     height: '100vh', pointerEvents: 'auto'
   },
+  exampleContainer: {
+    background: 'white',
+    borderRadius: 30,
+    width: 150,
+    height: 150,
+    position: 'absolute',
+    top: 'calc(50% - 150 / 2)',
+    left: 'calc(50% - 150 / 2)'
+  }
 })                                                                        /*b
                            d8P     d8P                                    88P
                         d888888Pd888888P                                 d88
@@ -30,7 +40,9 @@ export function Mattereal(props) {
   const classes = useStyles();
   const [markers, setMarkers] = useGlobal('markers');
   const [selectedMarker, setSelecteMarker] = useGlobal('selectedMarker')  
+  const constraintsRef = useRef(null);
   
+
   useEffect(() => {
     // Update the document title using the browser API
     setMarkers(props.markers)
@@ -38,10 +50,11 @@ export function Mattereal(props) {
 
   function onClick () {
     if (pp > idx) {
-      console.log('pp: ', pp)
-      console.log('idx: ', idx)
-      console.log('load.length: ', load.length)
-      setIdx(load.length > idx + 1 ? idx + 1 : 0)     
+      // console.log('pp: ', pp)
+      // console.log('idx: ', idx)
+      // console.log('load.length: ', load.length)
+      setIdx(load.length > idx + 1 ? idx + 1 : 0)   
+
     }
   }
 
@@ -53,22 +66,25 @@ export function Mattereal(props) {
       setPP(pp + plus + 2)
     }
   }
+  function onResize(width, height) {
+    console.log(width, height)
+  }
   const image = load[idx]
   return (
-    <>
+    <>      
       <Grid container justify = "center" style={{ position: 'fixed'}} >
-        {markers ? markers.map((marker, index) => {
-          
+        {markers ? markers.map((marker, index) => {          
           let selected = false
           if(marker.image === image && selectedMarker === index) {
             selected = true
           } else {
             selected = false
-          }
+          }          
           return (
-            <Marker key={index} id={index} image={image} marker={marker} selected={selected} />
+            <Marker key={index} id={index} image={image} marker={marker} selected={selected} constraintsRef={constraintsRef} />
           )}) : ''}
-        <Cookie handlePP={handlePP}>        
+        <Cookie handlePP={handlePP}>          
+          <motion.div ref={constraintsRef} >
           <Card >
           <CardActionArea>
             <CardMedia
@@ -81,6 +97,7 @@ export function Mattereal(props) {
             />
           </CardActionArea>
           </Card>
+          </motion.div> 
         </Cookie>
       </Grid>
     </>

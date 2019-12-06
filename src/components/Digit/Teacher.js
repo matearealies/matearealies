@@ -2,7 +2,7 @@ import React, { useState, useGlobal } from 'reactn'
 import { makeStyles } from '@material-ui/core/styles'
 import Icon from '@mdi/react'
 import { mdiTeach, mdiFileExport } from '@mdi/js'
-import { Menu, MenuItem } from '@material-ui/core'
+import { Fab, Menu, MenuItem } from '@material-ui/core'
 import { SpeedDial, SpeedDialAction } from '@material-ui/lab'
 import streamSaver from 'streamsaver'
 
@@ -19,8 +19,8 @@ const useStyles = makeStyles(theme => ({
     title: {
         fontSize: 14
     },
-}))
- /*_______                      __                     
+}))/*
+ __________                     __                     
 |  _   _  |                    [  |                    
 |_/ | | \_|.---.  ,--.   .---.  | |--.  .---.  _ .--.  
     | |   / /__\\`'_\ : / /'`\] | .-. |/ /__\\[ `/'`\] 
@@ -35,8 +35,24 @@ export function Teacher (props) {
     const [open, setOpen] = React.useState(false)
     const [selectedMarker, setSelectedMarker] = useGlobal('selectedMarker')
     const handleClick = event => {
-        setAnchorEl(event.currentTarget);
+        console.log('handleClick')
+        if (markers) {            
+            markers.push({ 
+                lession: "",
+                height: 100,
+                width: 100 
+            })
+            setMarkers(markers)
+        } else {
+            setMarkers([{ 
+                lession: "",
+                height: 100,
+                width: 100
+            }])
+        }
+        // setAnchorEl(event.currentTarget);
     }
+    
     const handleCloseMenu = () => {
         setAnchorEl(null);
     }
@@ -73,14 +89,14 @@ export function Teacher (props) {
             })
             if (fileStream) {
                 new Response(
-`{ 
-    "header": { 
-        "girl": "Ashlee Cox",
-        "event": "",
-        "type": "teacHer"
-    },     
-    "markers": ${JSON.stringify(markers)} 
-}`
+                    `{ 
+                        "header": { 
+                            "girl": "Ashlee Cox",
+                            "event": "",
+                            "type": "teacHer"
+                        },     
+                        "markers": ${JSON.stringify(markers)} 
+                    }`
                 ).body.pipeTo(fileStream)
             }
         }
@@ -88,7 +104,14 @@ export function Teacher (props) {
     }
     return (        
         <div>
-            <SpeedDial
+            <Fab color="primary" aria-label="matterealize" className={classes.fab} onClick={handleClick}>
+                <Icon path={mdiTeach}
+                    title="mark her"
+                    size={1}
+                    color="red"
+                />
+            </Fab>
+            {/* <SpeedDial
                 ariaLabel="TeacHer"
                 className={classes.speedDial}
                 icon={
@@ -141,8 +164,7 @@ export function Teacher (props) {
                 <MenuItem onClick={() => handleSelect('Suck')}>Face</MenuItem> 
                 <MenuItem onClick={() => handleSelect('Tits')}>Tits</MenuItem>
                 <MenuItem onClick={() => handleSelect('Toilet')}>Toilet</MenuItem>
-            </Menu>
+            </Menu> */}
         </div> 
     )
-    
 }

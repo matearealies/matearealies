@@ -51,7 +51,6 @@ export function Matterealize (props) {
         })
         var isValidJSON = true;
         try { JSON.parse(text) } catch { isValidJSON = false }
-        console.log('is valid Json:', isValidJSON)
         if (!isValidJSON) {
             new Response(text
                 .split(',')
@@ -66,7 +65,6 @@ export function Matterealize (props) {
         } 
         else {
             const json = JSON.parse(text)
-            console.log(json.header)
             props.handleTeacHer(json)
         }
     }

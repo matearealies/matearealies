@@ -23,21 +23,12 @@ const useStyles = makeStyles(theme => ({
     dialogContent: {
         width: 333
     }
-}));
-
-const steps = [
-    {
-      id: '0',
-      message: 'Welcome to react chatbot!',
-      trigger: '1',
-    },
-    {
-      id: '1',
-      message: 'Bye!',
-      end: true,
-    },
-  ];
-
+}));                                  
+ /*_  ___/                                                     
+   / /   ___      __      _   __     ( )   __      ___     //  
+  / /  //___) ) //  ) ) // ) )  ) ) / / //   ) ) //   ) ) //   
+ / /  //       //      // / /  / / / / //   / / //   / / //    
+/ /  ((____   //      // / /  / / / / //   / / ((___( ( */     
 export function Terminal (props) {
     const classes = useStyles();   
     

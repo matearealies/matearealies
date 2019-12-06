@@ -3,6 +3,7 @@ import { withStyles, makeStyles } from '@material-ui/core/styles'
 import { Card, CardContent, CardHeader, IconButton, Slider } from '@material-ui/core'
 import Icon from '@mdi/react'
 import { mdiToilet } from '@mdi/js'
+import { Tag } from './Tag'
 
 const useStyles = makeStyles(theme => ({   
   card: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles(theme => ({
 |(/  \ || |  |)|  | |    \  `-. | | |)|   | |   |  `--.| |  |)| \  `-. | | |)||  `--.| |\ \   
 (_)   \||_|  (_)  `-'     \____\/(  (_)   `-'   /( __.'|_|  (_)  \____\/(  (_)/( __.'|_| \)\  
                                (__)            (__)                   (__)   (__)        (_*/ 
-export function WatchTeacher (props) {
+export function Marker (props) {
   const classes = useStyles();  
   const [markers, setMarkers] = useGlobal('markers')  
   const [selectedMarker, setSelectedMarker] = useGlobal('selectedMarker')
@@ -84,6 +85,7 @@ export function WatchTeacher (props) {
           }
         />  
         <CardContent>
+          <Tag />
           height
           <PrettoSlider 
             valueLabelDisplay="auto" 
