@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { GoogleLogin } from 'react-google-login';
+import React, { useState } from 'react'
+import { GoogleLogin } from 'react-google-login'
 import { AccountKey  } from 'mdi-material-ui'
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Fab } from '@material-ui/core'
 import { motion } from 'framer-motion'
+
 const useStyles = makeStyles(theme => ({    
     root: {
         color: '#fff',
@@ -42,13 +43,12 @@ export function Login(props) {
     const classes = useStyles()
     const [profileImageUrl, setProfileImageUrl] = useState('')
 
-    function responseGoogle (response) { 
-        console.log(response)      
-        setProfileImageUrl(response.profileObj.imageUrl)
+    function responseGoogle (response) {
+        if (response) {
+            setProfileImageUrl(response.profileObj.imageUrl)
+        }
     }
     return (
-
-        
         <GoogleLogin
             clientId="1001750562670-13tl5gmis7taghhs2608c3rkkfs0ug46.apps.googleusercontent.com"
             render={renderProps => (

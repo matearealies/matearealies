@@ -1,6 +1,7 @@
 import React, { useEffect, useGlobal, useLayoutEffect, useState, useRef  } from 'reactn';
 import { makeStyles } from '@material-ui/core/styles';
 import { motion } from 'framer-motion'
+import { Watcher } from './Watcher'
  /*:=======  :::====  :::====  :::  === :::===== :::==== 
  ::: === === :::  === :::  === ::: ===  :::      :::  ===
  === === === ======== =======  ======   ======   ======= 
@@ -41,18 +42,18 @@ export function Marker(props) {
     const classes = useStyles()
     const [selectedMarker, setSelectedMarker] = useGlobal('selectedMarker')
     const [markers, setMarkers] = useGlobal('markers')
+    const [anchorElWatcher, setAnchorElWatcher] = React.useState(null);
     // 23407-1337
     // >3407-1337
     
     
-    function onDragEnd(event, info) {    
-        console.log(event, info)       
+    function onDragEnd(event, info) {                
         const marker = markers[id]
         marker.id = id
         marker.pageX = event.pageX
         marker.pageY = event.pageY
         marker.image = image
-        setSelectedMarker(id)          
+        setSelectedMarker(id)    
     }
     
     const style = props.marker.pageX
@@ -70,7 +71,7 @@ export function Marker(props) {
             // borderRadius: '100%',                                 
         }
     return (
-        <>            
+        <>     
             <motion.button 
                 className={ classes.box } 
                 id={ id } 
@@ -83,6 +84,7 @@ export function Marker(props) {
             >
                 {/* <Label className="label">{props.marker.lession}</Label> */}
             </motion.button> 
+            <Watcher />
         </>        
     )
 }
