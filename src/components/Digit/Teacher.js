@@ -1,95 +1,98 @@
-import React, { useState, useGlobal } from 'reactn'
-import { makeStyles } from '@material-ui/core/styles'
-import Icon from '@mdi/react'
-import { mdiTeach, mdiFileExport } from '@mdi/js'
-import { Fab, Menu, MenuItem } from '@material-ui/core'
-import { SpeedDial, SpeedDialAction } from '@material-ui/lab'
-import streamSaver from 'streamsaver'
+import React, { useState, useGlobal } from "reactn";
+import { makeStyles } from "@material-ui/core/styles";
+import Icon from "@mdi/react";
+import { mdiTeach, mdiFileExport } from "@mdi/js";
+import { Fab, Menu, MenuItem } from "@material-ui/core";
+import { SpeedDial, SpeedDialAction } from "@material-ui/lab";
+import streamSaver from "streamsaver";
 
-const useStyles = makeStyles(theme => ({   
-    card: {
-        minWidth: 200,
-    }, 
-    fab: {
-        margin: theme.spacing(1)
-    },
-    speedDial: {
-        margin: theme.spacing(1)
-    },    
-    title: {
-        fontSize: 14
-    },
-}))/*
+const useStyles = makeStyles(theme => ({
+  card: {
+    minWidth: 200
+  },
+  fab: {
+    margin: theme.spacing(1)
+  },
+  speedDial: {
+    margin: theme.spacing(1)
+  },
+  title: {
+    fontSize: 14
+  }
+})); /*
  __________                     __                     
 |  _   _  |                    [  |                    
 |_/ | | \_|.---.  ,--.   .---.  | |--.  .---.  _ .--.  
     | |   / /__\\`'_\ : / /'`\] | .-. |/ /__\\[ `/'`\] 
    _| |_  | \__.,// | |,| \__.  | | | || \__., | |     
-  |_____|  '.__.'\'-;__/'.___.'[___]|__]'.__.'[__*/                
-export function Teacher (props) {
-    const classes = useStyles();   
-    const [anchorEl, setAnchorEl] = useState(null)
-    const [lession, setLession] = useState('') 
-    const [markers, setMarkers] = useGlobal('markers')    
-    const [markerSize, setMarkerSize] = useGlobal('markerSize')
-    const [open, setOpen] = React.useState(false)
-    const [selectedMarker, setSelectedMarker] = useGlobal('selectedMarker')
-    const handleClick = event => {
-        console.log('handleClick')
-        if (markers) {            
-            markers.push({ 
-                lession: "",
-                height: 100,
-                width: 100 
-            })
-            setMarkers(markers)
-        } else {
-            setMarkers([{ 
-                lession: "",
-                height: 100,
-                width: 100
-            }])
+  |_____|  '.__.'\'-;__/'.___.'[___]|__]'.__.'[__*/
+export function Teacher(props) {
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [lession, setLession] = useState("");
+  const [markers, setMarkers] = useGlobal("markers");
+  const [markerSize, setMarkerSize] = useGlobal("markerSize");
+  const [open, setOpen] = React.useState(false);
+  const [selectedMarker, setSelectedMarker] = useGlobal("selectedMarker");
+  const handleClick = event => {
+    if (markers) {
+      markers.push({
+        lession: "",
+        height: 100,
+        width: 100
+      });
+      setMarkers(markers);
+    } else {
+      setMarkers([
+        {
+          lession: "",
+          height: 100,
+          width: 100
         }
-        // setAnchorEl(event.currentTarget);
+      ]);
     }
-    
-    const handleCloseMenu = () => {
-        setAnchorEl(null);
-    }
-    const handleClose = () => {
-        setOpen(false);
-    }
-    const handleOpen = () => {
-        setOpen(true);
-    }
-    const handleSelect = (lession) => {
-        setLession(lession)        
-        setAnchorEl(null);
-        if (markers) {            
-            markers.push({ 
-                lession: lession,
-                height: 100,
-                width: 100 
-            })
-            setMarkers(markers)
-        } else {
-            setMarkers([{ 
-                lession: lession,
-                height: 100,
-                width: 100
-            }])
+    // setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleSelect = lession => {
+    setLession(lession);
+    setAnchorEl(null);
+    if (markers) {
+      markers.push({
+        lession: lession,
+        height: 100,
+        width: 100
+      });
+      setMarkers(markers);
+    } else {
+      setMarkers([
+        {
+          lession: lession,
+          height: 100,
+          width: 100
         }
-    } 
-    const onSave = () => {
-        if (markers) {
-            const fileStream = streamSaver.createWriteStream('teacher.giz', {
-                size: 22, // (optional) Will show progress
-                writableStrategy: undefined, // (optional)
-                readableStrategy: undefined  // (optional)
-            })
-            if (fileStream) {
-                new Response(
-                    `{ 
+      ]);
+    }
+  };
+  const onSave = () => {
+    if (markers) {
+      const fileStream = streamSaver.createWriteStream("teacher.giz", {
+        size: 22, // (optional) Will show progress
+        writableStrategy: undefined, // (optional)
+        readableStrategy: undefined // (optional)
+      });
+      if (fileStream) {
+        new Response(
+          `{ 
                         "header": { 
                             "girl": "Ashlee Cox",
                             "event": "",
@@ -97,21 +100,22 @@ export function Teacher (props) {
                         },     
                         "markers": ${JSON.stringify(markers)} 
                     }`
-                ).body.pipeTo(fileStream)
-            }
-        }
-        setOpen(false);        
+        ).body.pipeTo(fileStream);
+      }
     }
-    return (        
-        <div>
-            <Fab color="primary" aria-label="matterealize" className={classes.fab} onClick={handleClick}>
-                <Icon path={mdiTeach}
-                    title="mark her"
-                    size={1}
-                    color="red"
-                />
-            </Fab>
-            {/* <SpeedDial
+    setOpen(false);
+  };
+  return (
+    <div>
+      <Fab
+        color="primary"
+        aria-label="matterealize"
+        className={classes.fab}
+        onClick={handleClick}
+      >
+        <Icon path={mdiTeach} title="mark her" size={1} color="red" />
+      </Fab>
+      {/* <SpeedDial
                 ariaLabel="TeacHer"
                 className={classes.speedDial}
                 icon={
@@ -165,6 +169,6 @@ export function Teacher (props) {
                 <MenuItem onClick={() => handleSelect('Tits')}>Tits</MenuItem>
                 <MenuItem onClick={() => handleSelect('Toilet')}>Toilet</MenuItem>
             </Menu> */}
-        </div> 
-    )
+    </div>
+  );
 }
