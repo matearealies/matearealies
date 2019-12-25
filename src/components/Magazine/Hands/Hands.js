@@ -1,21 +1,21 @@
 import React, { useState } from 'react'
-import { Button, Divider, Fab, IconButton, SwipeableDrawer } from '@material-ui/core';
+import { Divider, IconButton, SwipeableDrawer } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { ChevronLeft, ChevronRight, MenuOpen, HandRight, HandLeft } from 'mdi-material-ui'
-import { Login, Matterealize, Teacher, Terminal } from '../Digit'
-import { Watch as MarkerWatch } from '../Marker/Watch'
- /*       __                                         
-/  \     /  |                                        
-$$  \   /$$ |  ______   _______   __    __   _______ 
-$$$  \ /$$$ | /      \ /       \ /  |  /  | /       |
-$$$$  /$$$$ |/$$$$$$  |$$$$$$$  |$$ |  $$ |/$$$$$$$/ 
-$$ $$ $$/$$ |$$    $$ |$$ |  $$ |$$ |  $$ |$$      \ 
-$$ |$$$/ $$ |$$$$$$$$/ $$ |  $$ |$$ \__$$ | $$$$$$  |
-$$ | $/  $$ |$$       |$$ |  $$ |$$    $$/ /     $$/ 
-$$/      $$/  $$$$$$$/ $$/   $$/  $$$$$$/  $$$$$$*/                               
-function Menus (props) {
-    const { left, right } = props
-    const [menuOpen, setMenuOpen] = useState(false)
+import { ChevronLeft, ChevronRight, MenuOpen } from 'mdi-material-ui'
+import { Matterealize, Terminal } from './Digit'
+import { Login } from './Digit/Login/Login'
+import { Teacher, Watcher } from './Digit/Teacher'
+/*SSS SSSSS                                                    
+SSSSS SSSSS .sSSSSs.    .sSSSs.  SSSSS .sSSSSs.    .sSSSSSSSs. 
+S SSS SSSSS S SSSSSSSs. S SSS SS SSSSS S SSSSSSSs. S SSS SSSS' 
+S  SS SSSSS S  SS SSSSS S  SS  `sSSSSS S  SS SSSSS S  SS       
+S..SSsSSSSS S..SSsSSSSS S..SS    SSSSS S..SS SSSSS `SSSSsSSSa. 
+S:::S SSSSS S:::S SSSSS S:::S    SSSSS S:::S SSSSS .sSSS SSSSS 
+S;;;S SSSSS S;;;S SSSSS S;;;S    SSSSS S;;;S SSSSS S;;;S SSSSS 
+S%%%S SSSSS S%%%S SSSSS S%%%S    SSSSS S%%%S SSSS' S%%%S SSSSS 
+SSSSS SSSSS SSSSS SSSSS SSSSS    SSSSS SSSSSsS;:'  SSSSSsSSS*/                               
+function Hands (props) {
+    
     const [state, setState] = useState({        
         left: false,        
         right: false,
@@ -86,7 +86,8 @@ function Menus (props) {
                         {theme.direction === 'ltr' ? <ChevronLeft /> : <ChevronRight /> }
                     </IconButton>
                 </div>
-                <Divider />                
+                <Divider />
+                <Watcher />    
             </SwipeableDrawer>  
             <SwipeableDrawer
                 anchor="right"                
@@ -110,6 +111,6 @@ function Menus (props) {
        
 }
          
-export default Menus                               
+export default Hands                               
                                              
                                              

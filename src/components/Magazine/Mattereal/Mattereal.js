@@ -3,8 +3,9 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Card, CardActionArea, CardMedia, Grid } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import { Cookie } from './Cookie'
-import { Marker } from '../Marker/Marker'
+import { Marker } from '../Hands/Digit/Teacher/Marker'
 import { motion } from 'framer-motion';
+
 
 const propTypes = {
   src: PropTypes.string.isRequired,  
@@ -42,7 +43,6 @@ export function Mattereal(props) {
   const [selectedMarker, setSelecteMarker] = useGlobal('selectedMarker')  
   const constraintsRef = useRef(null);
   
-
   useEffect(() => {
     // Update the document title using the browser API
     setMarkers(props.markers)

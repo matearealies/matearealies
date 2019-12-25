@@ -19,8 +19,8 @@ const useStyles = makeStyles(theme => ({
   title: {
     fontSize: 14
   }
-})); /*
- __________                     __                     
+}));
+ /*________                     __                     
 |  _   _  |                    [  |                    
 |_/ | | \_|.---.  ,--.   .---.  | |--.  .---.  _ .--.  
     | |   / /__\\`'_\ : / /'`\] | .-. |/ /__\\[ `/'`\] 
@@ -113,7 +113,7 @@ export function Teacher(props) {
         className={classes.fab}
         onClick={handleClick}
       >
-        <Icon path={mdiTeach} title="mark her" size={1} color="red" />
+        <Icon path={mdiTeach} title="Teach her" size={1} color="red" />
       </Fab>
       {/* <SpeedDial
                 ariaLabel="TeacHer"

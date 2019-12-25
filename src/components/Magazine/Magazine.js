@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Mattereal } from '../Mattereal/';
-import Menus from '../Menus/Menus';
+import { Mattereal } from './Mattereal/';
+import Menus from './Hands/Hands';
 import streamSaver from 'streamsaver'
           /*-.    ,--,     .--.   _____  ,-..-. .-.,---.   
 |\    /| / /\ \ .' .'     / /\ \ /___  / |(||  \| || .-'   
@@ -23,7 +23,6 @@ function Magazine(props) {
         <>
             <Menus handleLoad={handleLoad} handleTeacHer={handleTeacHer} /> 
             <Mattereal store={store} load={load} markers={markers} />
-            
         </>
     );
 }
