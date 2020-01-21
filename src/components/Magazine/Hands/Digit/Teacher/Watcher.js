@@ -2,8 +2,8 @@ import React, { useState, useGlobal } from 'reactn'
 import { withStyles, makeStyles } from '@material-ui/core/styles'
 import { Card, CardContent, CardHeader, IconButton, Slider } from '@material-ui/core'
 import Icon from '@mdi/react'
-import { mdiToilet } from '@mdi/js'
 import { Tag } from './Tag'
+import { Toilet } from 'mdi-material-ui'
 
 const useStyles = makeStyles(theme => ({   
   card: {
@@ -83,12 +83,11 @@ export function Watcher (props) {
           title={ marker.lession }
           action={
             <IconButton aria-label="toylet" className={classes.margin} onClick={handleToylet}>
-              <Icon path={mdiToilet} title="toylet" size={1} />
+              <Toilet />
             </IconButton>
           }
         />  
         <CardContent>
-          <Tag />
           height
           <PrettoSlider 
             valueLabelDisplay="auto" 

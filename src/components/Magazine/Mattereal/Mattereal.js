@@ -4,7 +4,8 @@ import { Card, CardActionArea, CardMedia, Grid } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import { Cookie } from './Cookie'
 import { Marker } from '../Hands/Digit/Teacher/Marker'
-import { motion } from 'framer-motion';
+import { WhoIsNext } from '../Hands/Digit/Teacher/WhoIsNext'
+import { motion } from 'framer-motion'
 
 
 const propTypes = {
@@ -66,6 +67,15 @@ export function Mattereal(props) {
       setPP(pp + plus + 2)
     }
   }
+
+  function handleWIN() {
+    setIdx(load.length > idx + 1 ? idx + 1 : idx) 
+  }
+
+  function handleWIB() {
+    setIdx(idx === 0 ? idx - 1 : 0) 
+  }
+
   function onResize(width, height) {
     console.log(width, height)
   }
@@ -76,29 +86,32 @@ export function Mattereal(props) {
         {markers ? markers.map((marker, index) => {          
           let selected = false
           if(marker.image === image && selectedMarker === index) {
-            selected = true
+            selected = true 
           } else {
             selected = false
           }          
           return (
             <Marker key={index} id={index} image={image} marker={marker} selected={selected} constraintsRef={constraintsRef} />
           )}) : ''}
-        <Cookie handlePP={handlePP}>          
-          <motion.div ref={constraintsRef} >
-          <Card >
-          <CardActionArea>
-            <CardMedia
-              className={classes.card}
-              component="img"
-              image={image}
-              onClick={(e) => { onClick() }}
-              src={image}
-              onError={() => {setIdx(load.length > idx + 1 ? idx + 1 : 0)}}
-            />
-          </CardActionArea>
-          </Card>
-          </motion.div> 
-        </Cookie>
+        <WhoIsNext handleWIB={handleWIB} handleWIN={handleWIN}>
+          <Cookie handlePP={handlePP}>          
+            <motion.div ref={constraintsRef} >
+            <Card className="qcard">
+            <CardActionArea>
+              <CardMedia
+                className={classes.card}
+                component="img"
+                image={image}
+                onClick={(e) => { onClick() }}
+                src={image}
+                onError={() => {setIdx(load.length > idx + 1 ? idx + 1 : 0)}}
+              />
+            </CardActionArea>
+            </Card>
+            </motion.div> 
+          </Cookie>
+        </WhoIsNext>
+        
       </Grid>
     </>
   )

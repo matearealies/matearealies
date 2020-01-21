@@ -6,8 +6,6 @@ import Draggable from 'react-draggable';
 import Icon from '@mdi/react';
 import TerminalInReact from 'terminal-in-react';
 
-
-
 function PaperComponent(props) {
     return (
       <Draggable cancel={'[class*="MuiDialogContent-root"]'}>
@@ -48,7 +46,7 @@ export function Terminal (props) {
                 <Icon path={mdiConsole }
                     title="chat"
                     size={1}
-                    color="red"
+                    color="white"
                 />
             </Fab>
             <Dialog

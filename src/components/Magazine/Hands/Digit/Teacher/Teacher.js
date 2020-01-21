@@ -1,9 +1,7 @@
-import React, { useState, useGlobal } from "reactn";
-import { makeStyles } from "@material-ui/core/styles";
-import Icon from "@mdi/react";
-import { mdiTeach, mdiFileExport } from "@mdi/js";
-import { Fab, Menu, MenuItem } from "@material-ui/core";
-import { SpeedDial, SpeedDialAction } from "@material-ui/lab";
+import React, { useState, useGlobal } from "reactn"
+import { makeStyles } from "@material-ui/core/styles"
+import { Teach, FileExport } from 'mdi-material-ui'
+import { Fab, Menu, MenuItem, WhoIsNext } from "@material-ui/core"
 import streamSaver from "streamsaver";
 
 const useStyles = makeStyles(theme => ({
@@ -93,13 +91,13 @@ export function Teacher(props) {
       if (fileStream) {
         new Response(
           `{ 
-                        "header": { 
-                            "girl": "Ashlee Cox",
-                            "event": "",
-                            "type": "teacHer"
-                        },     
-                        "markers": ${JSON.stringify(markers)} 
-                    }`
+            "header": { 
+                "girl": "Ashlee Cox",
+                "event": "",
+                "type": "teacHer"
+            },     
+            "markers": ${JSON.stringify(markers)} 
+          }`
         ).body.pipeTo(fileStream);
       }
     }
@@ -109,66 +107,11 @@ export function Teacher(props) {
     <div>
       <Fab
         color="primary"
-        aria-label="matterealize"
         className={classes.fab}
         onClick={handleClick}
       >
-        <Icon path={mdiTeach} title="Teach her" size={1} color="red" />
+        <Teach />        
       </Fab>
-      {/* <SpeedDial
-                ariaLabel="TeacHer"
-                className={classes.speedDial}
-                icon={
-                    <Icon path={mdiTeach }
-                        title="teach her"
-                        size={1}
-                        color="red"/>
-                }
-                onClick={handleClick}
-                onClose={handleClose}
-                onOpen={handleOpen}
-                open={open}
-                direction={"right"}>
-                <SpeedDialAction                
-                    key={"export"}
-                    icon={
-                        <Icon path={mdiFileExport }
-                            title="export teacHer"
-                            size={1}
-                            color="red"/>
-                    }
-                    tooltipTitle={"export"}
-                    onClick={onSave}/>            
-            </SpeedDial>
-            <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleCloseMenu}>
-                <MenuItem onClick={() => handleSelect('Ass')}>Ass</MenuItem>
-                <MenuItem onClick={() => handleSelect('Asshole')}>Asshole</MenuItem> 
-                <MenuItem onClick={() => handleSelect('Creampie')}>Creampie</MenuItem>
-                <MenuItem onClick={() => handleSelect('Cum')}>Cum</MenuItem>
-                <MenuItem onClick={() => handleSelect('Cunt')}>Cunt</MenuItem>                
-                <MenuItem onClick={() => handleSelect('Face')}>Face</MenuItem> 
-                <MenuItem onClick={() => handleSelect('Flirt')}>Flirt</MenuItem> 
-                <MenuItem onClick={() => handleSelect('Fuck')}>Fuck</MenuItem> 
-                <MenuItem onClick={() => handleSelect('Gag')}>Gag</MenuItem> 
-                <MenuItem onClick={() => handleSelect('Gape')}>Gape</MenuItem>                
-                <MenuItem onClick={() => handleSelect('Hair')}>Hair</MenuItem>   
-                <MenuItem onClick={() => handleSelect('Hand')}>Hand</MenuItem>   
-                <MenuItem onClick={() => handleSelect('Hot')}>Face</MenuItem>                                           
-                <MenuItem onClick={() => handleSelect('Heels')}>Heels</MenuItem>   
-                <MenuItem onClick={() => handleSelect('Jackoff')}>Jackoff</MenuItem>   
-                <MenuItem onClick={() => handleSelect('Lingerie')}>Lingerie</MenuItem>
-                <MenuItem onClick={() => handleSelect('Mouth')}>Mouth</MenuItem>
-                <MenuItem onClick={() => handleSelect('Pubes')}>Pubes</MenuItem>   
-                <MenuItem onClick={() => handleSelect('Stockings')}>Stockings</MenuItem>
-                <MenuItem onClick={() => handleSelect('Suck')}>Face</MenuItem> 
-                <MenuItem onClick={() => handleSelect('Tits')}>Tits</MenuItem>
-                <MenuItem onClick={() => handleSelect('Toilet')}>Toilet</MenuItem>
-            </Menu> */}
     </div>
   );
 }
