@@ -3,8 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { motion } from "framer-motion";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Grid, TextField } from '@material-ui/core';
-import parse from 'autosuggest-highlight/parse';
-import match from 'autosuggest-highlight/match';
+// import parse from 'autosuggest-highlight/parse';
+// import match from 'autosuggest-highlight/match';
  /*:=======  :::====  :::====  :::  === :::===== :::==== 
  ::: === === :::  === :::  === ::: ===  :::      :::  ===
  === === === ======== =======  ======   ======   ======= 
