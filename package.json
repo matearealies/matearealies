@@ -5,6 +5,7 @@
   "homepage": "http://matearealies.github.io/matearealies",
   "dependencies": {
     "@material-ui/core": "^4.7.2",
+    "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.35",
     "@mdi/js": "^4.7.95",
     "@mdi/react": "^1.2.1",
@@ -24,6 +25,7 @@
     "react-draggable": "^4.2.0",
     "react-eyedrop": "^3.3.2",
     "react-google-login": "^5.0.7",
+    "react-google-sheets": "^0.4.0",
     "react-muuri": "^0.3.0",
     "react-radial-menu": "^1.0.0",
     "react-resize-detector": "^4.2.1",
@@ -33,7 +35,8 @@
     "reactn": "^2.2.4",
     "streamsaver": "^2.0.3",
     "terminal-in-react": "^4.3.1",
-    "typeface-roboto": "0.0.75"
+    "typeface-roboto": "0.0.75",
+    "under-the-sheets": "^0.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

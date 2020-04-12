@@ -1,7 +1,7 @@
 import React, { useState, useGlobal } from "reactn"
 import { makeStyles } from "@material-ui/core/styles"
 import { Teach, FileExport } from 'mdi-material-ui'
-import { Fab, Menu, MenuItem, WhoIsNext } from "@material-ui/core"
+import { Fab, ListItem, ListItemIcon, ListItemText, Menu, MenuItem, WhoIsNext } from "@material-ui/core"
 import streamSaver from "streamsaver";
 
 const useStyles = makeStyles(theme => ({
@@ -10,6 +10,9 @@ const useStyles = makeStyles(theme => ({
   },
   fab: {
     margin: theme.spacing(1)
+  },
+  icon: {
+    marginRight: theme.spacing(1),
   },
   speedDial: {
     margin: theme.spacing(1)
@@ -31,7 +34,9 @@ export function Teacher(props) {
   const [markers, setMarkers] = useGlobal("markers");
   const [markerSize, setMarkerSize] = useGlobal("markerSize");
   const [open, setOpen] = React.useState(false);
-  const [selectedMarker, setSelectedMarker] = useGlobal("selectedMarker");
+  const [selectedMarker, setSelectedMarker] = useGlobal("selectedMarker");  
+  const [profileToken, setProfileToken] = useGlobal('profileToken')
+
   const handleClick = event => {
     if (markers) {
       markers.push({
@@ -103,15 +108,20 @@ export function Teacher(props) {
     }
     setOpen(false);
   };
-  return (
-    <div>
-      <Fab
-        color="primary"
-        className={classes.fab}
-        onClick={handleClick}
-      >
-        <Teach />        
-      </Fab>
-    </div>
-  );
+  
+  if (profileToken === undefined) {
+        return (<div></div>)
+    } else {
+      return (
+        
+        <div>
+          <ListItem button onClick={handleClick}>
+            <ListItemIcon>
+                <Teach />
+            </ListItemIcon>
+            <ListItemText primary="Teacher" />
+          </ListItem>       
+        </div>
+      )
+    }
 }

@@ -3,7 +3,7 @@ import { GoogleLogin } from 'react-google-login'
 import { AccountKey } from 'mdi-material-ui'
 import { makeStyles } from '@material-ui/core/styles'
 import { Accountings } from './Accountings'
-import { Avatar, Fab, ListItem, ListItemIcon, ListItemText, Popover } from '@material-ui/core'
+import { Avatar, Button, Popover } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({        
     fab: {
@@ -40,20 +40,12 @@ export function Login(props) {
     };
     return (
         <>
-            <GoogleLogin
+            <GoogleLogin 
                 clientId="1001750562670-13tl5gmis7taghhs2608c3rkkfs0ug46.apps.googleusercontent.com"
                 render={renderProps => ( profileImageUrl ? 
-                    <ListItem button >
-                        <Avatar src={ profileImageUrl } />                        
-                    </ListItem> :
-                    <ListItem button onClick={renderProps.onClick} disabled={renderProps.disabled}>
-                        <ListItemIcon>
-                            <AccountKey />
-                        </ListItemIcon>
-                        <ListItemText primary="Login" />
-                    </ListItem>
+                    <Avatar src={ profileImageUrl } />   :
+                    <Button color="primary" onClick={renderProps.onClick} disabled={renderProps.disabled}>Login</Button>
                 )}
-                buttonText="Login"
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
                 cookiePolicy={'single_host_origin'}

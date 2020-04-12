@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useGlobal } from 'reactn'
 import { makeStyles } from '@material-ui/core/styles'
-import { AppBar, Button, Dialog, Fab, IconButton, Slide, TextField, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, Button, Dialog, Fab, IconButton, ListItem, ListItemIcon, ListItemText, Slide, TextField, Toolbar, Typography } from '@material-ui/core'
 import Icon from '@mdi/react'
-import { mdiClose, mdiFirebase } from '@mdi/js'
+import { Close, Firebase } from 'mdi-material-ui'
 import streamSaver from 'streamsaver'
 
 const useStyles = makeStyles(theme => ({
@@ -30,6 +30,7 @@ export function Matterealize (props) {
     const classes = useStyles()
     const [open, setOpen] = useState(false)
     const [text, setText] = useState('')
+    const [profileToken, setProfileToken] = useGlobal('profileToken')
     function getFileExtension (filename) {
         var re = /(?:\.([^.]+))?$/
         var ext = re.exec(filename)[1];
@@ -68,40 +69,40 @@ export function Matterealize (props) {
             props.handleTeacHer(json)
         }
     }
-    return (
-        <>
-            <Fab color="primary" aria-label="matterealize" className={classes.fab} onClick={handleClickOpen}>
-                <Icon path={mdiFirebase}
-                    title="matterealize mattereal"
-                    size={1}
-                    color="white"
-                />
-            </Fab>
-            <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-                <AppBar className={classes.appBar}>
-                <Toolbar>
-                    <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
-                    <Icon path={mdiClose}
-                        title="close"
-                        size={1}
+    if (profileToken === undefined) {
+        return (<div></div>)
+    } else {
+        return (
+            <>
+                <ListItem button onClick={handleClickOpen} >
+                    <ListItemIcon>
+                        <Firebase />
+                    </ListItemIcon>
+                    <ListItemText primary="Matterealize" />
+                </ListItem>            
+                <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+                    <AppBar className={classes.appBar}>
+                    <Toolbar>
+                        <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+                        <Close />
+                        </IconButton>
+                        <Typography variant="h6" className={classes.title}>
+                        Matterealize
+                        </Typography>
+                        <Button color="inherit" onClick={() => {
+                            onMaterialize();
+                            handleClose();
+                        }}>
+                        Materialize
+                        </Button>
+                    </Toolbar>
+                    </AppBar>
+                    <TextField id="outlined-full-width" label="Matterealize" style={{ margin: 8 }} placeholder="Paste html content"
+                        margin="normal" variant="outlined" multiline rows="33" InputLabelProps={{ shrink: true }} 
+                        onChange={handleChangeTextField}
                     />
-                    </IconButton>
-                    <Typography variant="h6" className={classes.title}>
-                    Matterealize
-                    </Typography>
-                    <Button color="inherit" onClick={() => {
-                        onMaterialize();
-                        handleClose();
-                    }}>
-                    Materialize
-                    </Button>
-                </Toolbar>
-                </AppBar>
-                <TextField id="outlined-full-width" label="Matterealize" style={{ margin: 8 }} placeholder="Paste html content"
-                    margin="normal" variant="outlined" multiline rows="33" InputLabelProps={{ shrink: true }} 
-                    onChange={handleChangeTextField}
-                />
-            </Dialog>
-        </>
-    )
+                </Dialog>
+            </>
+        )
+    }
 }

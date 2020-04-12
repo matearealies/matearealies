@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
-import { Divider, IconButton, SwipeableDrawer } from '@material-ui/core';
+import { Divider, Fab, Icon, IconButton, List, ListItem, ListItemIcon, ListItemText, SwipeableDrawer } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { ChevronLeft, ChevronRight, MenuOpen } from 'mdi-material-ui'
-import { Matterealize, Terminal } from './Digit'
+
+import { mdiLibraryShelves } from '@mdi/js'
+import { Matterealize } from './Digit/Matterealize/'
+import { Terminal } from './Digit/'
 import { Login } from './Digit/Login/Login'
 import { Teacher, Watcher } from './Digit/Teacher'
+import { Story } from './Digit/Story/'
 /*SSS SSSSS                                                    
 SSSSS SSSSS .sSSSSs.    .sSSSs.  SSSSS .sSSSSs.    .sSSSSSSSs. 
 S SSS SSSSS S SSSSSSSs. S SSS SS SSSSS S SSSSSSSs. S SSS SSSS' 
@@ -14,8 +18,7 @@ S:::S SSSSS S:::S SSSSS S:::S    SSSSS S:::S SSSSS .sSSS SSSSS
 S;;;S SSSSS S;;;S SSSSS S;;;S    SSSSS S;;;S SSSSS S;;;S SSSSS 
 S%%%S SSSSS S%%%S SSSSS S%%%S    SSSSS S%%%S SSSS' S%%%S SSSSS 
 SSSSS SSSSS SSSSS SSSSS SSSSS    SSSSS SSSSSsS;:'  SSSSSsSSS*/                               
-function Hands (props) {
-    
+function Hands (props) {    
     const [state, setState] = useState({        
         left: false,        
         right: false,
@@ -27,6 +30,37 @@ function Hands (props) {
         }
         setState({ ...state, [side]: open });
     };
+    const useStyles = makeStyles(theme => ({
+        root: {
+            position: 'relative',
+        },
+        list: {
+            width: 250,
+        },     
+        fab: {
+            margin: theme.spacing(1),
+        },  
+        fabRight: {
+            position: 'absolute',
+            top: theme.spacing(2),            
+            right: theme.spacing(2),
+            zIndex: 2
+        },      
+        fabLeft: {
+            position: 'absolute',
+            top: theme.spacing(2),
+            left: theme.spacing(0),
+            zIndex: 2
+        },   
+        iconFlipped: {
+            '-o-transform': 'scaleX(-1)',
+            '-moz-transform': 'scaleX(-1)',
+            '-webkit-transform': 'scaleX(-1)',
+            '-ms-transform': 'scaleX(-1)',
+            transform: 'scaleX(-1)'
+        }              
+    }))
+    const classes = useStyles()
 
     function handleMatterealize(load) {
         if (load) {
@@ -40,34 +74,10 @@ function Hands (props) {
         }
     }
     
-    const useStyles = makeStyles(theme => ({
-        root: {
-            position: 'relative',
-        },
-        list: {
-            width: 250,
-        },       
-        fabRight: {
-            position: 'absolute',
-            top: theme.spacing(2),            
-            right: theme.spacing(2),
-            zIndex: 2
-        },      
-        fabLeft: {
-            position: 'absolute',
-            top: theme.spacing(2),
-            left: theme.spacing(2),
-            zIndex: 2
-        },   
-        iconFlipped: {
-            '-o-transform': 'scaleX(-1)',
-            '-moz-transform': 'scaleX(-1)',
-            '-webkit-transform': 'scaleX(-1)',
-            '-ms-transform': 'scaleX(-1)',
-            transform: 'scaleX(-1)'
-        }              
-    }))
-    const classes = useStyles()
+    function gotoAlbum() {
+        
+    }
+
     return (
         <>   
             <IconButton className={classes.fabLeft} onClick={toggleDrawer('left', true)}>
@@ -100,15 +110,20 @@ function Hands (props) {
                         {theme.direction === 'ltr' ? <ChevronRight /> : <ChevronLeft />}
                     </IconButton>
                 </div>
+                
                 <Divider />
-                <Login />
-                <Matterealize handleMatterealize={handleMatterealize} handleTeacHer={handleTeacHer} />
+                <List component="nav" aria-label="main mailbox folders">
+                    <Login />
+                    <Matterealize handleMatterealize={handleMatterealize} handleTeacHer={handleTeacHer} />    
+                </List>
+                
+                
                 <Terminal />
                 <Teacher />
+                <Story />
             </SwipeableDrawer>              
         </>
-    )
-       
+    ) 
 }
          
 export default Hands                               
