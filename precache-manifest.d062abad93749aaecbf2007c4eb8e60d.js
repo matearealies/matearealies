@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f911e2b5b1ae17a87fe0c2953cf37fac",
+    "revision": "a17fcd42d3182299500a0924ec6c1a0a",
     "url": "/matearealies/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/matearealies/static/css/2.2fc218a5.chunk.css"
   },
   {
-    "revision": "2e9605a7c8a3424f5276",
+    "revision": "591914b7c704787c55a8",
     "url": "/matearealies/static/css/main.fbe00f30.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/matearealies/static/js/2.5f3af110.chunk.js.LICENSE"
   },
   {
-    "revision": "2e9605a7c8a3424f5276",
-    "url": "/matearealies/static/js/main.293523d0.chunk.js"
+    "revision": "591914b7c704787c55a8",
+    "url": "/matearealies/static/js/main.9fb02e87.chunk.js"
   },
   {
     "revision": "9ce068ff41228e1ec699",
