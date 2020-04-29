@@ -9,12 +9,12 @@ const useStyles = makeStyles(theme => ({
     }
 }))
  
-export function Accountings(props) {
-    const [token, setToken] = useGlobal('token')    
+export function Account(props) {
+    const [profileToken, setProfileToken] = useGlobal('profileToken')    
     const classes = useStyles()
     useEffect(() => {
-        if (token) {
-            fetch(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${token.Zi.id_token}`)
+        if (profileToken) {
+            fetch(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${profileToken.tokenId}`)
                 .then((response) => {
                     return response.json();
                 })
@@ -30,7 +30,7 @@ export function Accountings(props) {
                     
                 </Grid>
                 <Grid item xs={2}>     
-                    <Avatar alt="Remy Sharp" src={token.profileObj.imageUrl} className={classes.large} />       
+                    <Avatar alt="Remy Sharp" src={profileToken.Pt.QK} className={classes.large} />       
                 </Grid>
                 <Grid item xs={5}>     
                     

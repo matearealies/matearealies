@@ -6,7 +6,6 @@ import { ChevronLeft, ChevronRight, MenuOpen } from 'mdi-material-ui'
 import { mdiLibraryShelves } from '@mdi/js'
 import { Matterealize } from './Digit/Matterealize/'
 import { Terminal } from './Digit/'
-import { Login } from './Digit/Login/Login'
 import { Teacher, Watcher } from './Digit/Teacher'
 import { Story } from './Digit/Story/'
 /*SSS SSSSS                                                    
@@ -112,8 +111,7 @@ function Hands (props) {
                 </div>
                 
                 <Divider />
-                <List component="nav" aria-label="main mailbox folders">
-                    <Login />
+                <List component="nav" aria-label="main mailbox folders">                    
                     <Matterealize handleMatterealize={handleMatterealize} handleTeacHer={handleTeacHer} />    
                 </List>
                 

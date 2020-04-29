@@ -1,13 +1,11 @@
 import React, { useEffect, useState, useGlobal, useRef } from 'reactn'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
-import { AppBar, Avatar, Button, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@material-ui/core'
-
+import { AppBar, Avatar, Button, CssBaseline, Divider, Drawer, Fab, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@material-ui/core'
 import clsx from 'clsx';
-
-import { ChevronLeft, ChevronRight, Inbox, Mail, Menu } from 'mdi-material-ui';
-
-import { GoogleLogin } from 'react-google-login'
+import { AccessPointNetwork, ChevronLeft, ChevronRight, Creation, Inbox, LoginVariant, Mail, Menu } from 'mdi-material-ui';
 import { Login } from './Login/'
+import { Relay } from '../Relay/'
+import { Matrix } from '../Matrix/'
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -65,11 +63,20 @@ const useStyles = makeStyles((theme) => ({
       width: theme.spacing(9) + 1,
     },
   },
+  fab: {
+    position: 'absolute',
+    bottom: theme.spacing(3),
+    right: theme.spacing(3),
+    color: 'darkslateblue'
+  },
   hide: {
     display: 'none',
   },
   menuButton: {
     marginRight: theme.spacing(2),
+  },
+  spacer: {
+    marginTop: theme.spacing(7)
   },
   title: {
     flexGrow: 1,
@@ -87,9 +94,34 @@ const useStyles = makeStyles((theme) => ({
 function MiniDrawer() {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);    
+  const [open, setOpen] = useState(false);    
+  const [sector, setSector] = useState('');
+
+  const [profileToken, setProfileToken] = useGlobal('profileToken')
   const handleDrawerOpen = () => { setOpen(true) }
   const handleDrawerClose = () => { setOpen(false) }  
+  
+
+  function Options() {
+    if (profileToken) {
+      return (<>
+      <List>
+        <ListItem button key='relay' onClick={() => setSector('relay')}>
+          <ListItemIcon><AccessPointNetwork/></ListItemIcon>
+          <ListItemText primary="Relay" />
+        </ListItem>
+      </List>        
+      <Divider />
+      <List>
+        <ListItem button key='matrix' onClick={() => setSector('matrix')}>
+          <ListItemIcon><Creation/></ListItemIcon>
+          <ListItemText primary="Matrix" />
+        </ListItem>
+      </List>
+      </>);
+    }
+    return <></>;
+  }
 
   return (
     <div className={classes.root}>
@@ -114,15 +146,17 @@ function MiniDrawer() {
           </IconButton>
           <Typography
               className={classes.brandText}
-              color="primary">             
-          888   |           888 888       ,88~~\     d8             888  /                                    888                 888  e88~~\  <br/>
-          888___|  e88~~8e  888 888      d888   \  _d88__  e88~~8e  888 /    888-~88e  e88~-_  Y88b    e    / 888  e88~~8e   e88~\888 d888     <br/>
-          888   | d888  88b 888 888     88888    |  888   d888  88b 888/\    888  888 d888   i  Y88b  d8b  /  888 d888  88b d888  888 8888 __  <br/>
-          888   | 8888__888 888 888     88888    |  888   8888__888 888  \   888  888 8888   |   Y888/Y88b/   888 8888__888 8888  888 8888   | <br/>
-          888   | Y888    , 888 888      Y888   /   888   Y888    , 888   \  888  888 Y888   '    Y8/  Y8/    888 Y888    , Y888  888 Y888   | <br/>
-          888   |  "88___/  888 888____   `88__/    "88_/  "88___/  888    \ 888  888  "88_-~      Y    Y     888  "88___/   "88_/888  "88__/  
+              color="primary">       
+               __    _   ___/   ___/               _                         <br/>
+               |\   |  .'  /\ .'  /\   ____ \,___, /        ___  .___    ___ <br/>
+               | \  |  |  / | |  / |  (     |    \ |,---. .'   ` /   \ .'   `<br/>
+               |  \ |  |,'  | |,'  |  `--.  |    | |'   ` |----' |   ' |----'<br/>
+               |   \|  /`---' /`---' \___.' |`---' /    | `.___, /     `.___,<br/>
+                                            \                                 
           </Typography>                                                                                                                                                 
-          <Login />         
+          <IconButton color="primary" className={classes.fab} >
+            <LoginVariant />  
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -144,49 +178,14 @@ function MiniDrawer() {
           </IconButton>
         </div>
         <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <Inbox /> : <Mail />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+        <div className={classes.spacer} />
         <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <Inbox /> : <Mail />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+        <Options />
       </Drawer>
       <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-          facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-          gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-          donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-          Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-          imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-          arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-          donec massa sapien faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-          facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
-          tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-          consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-          vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-          hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et
-          tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin
-          nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
-          accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        <div className={classes.toolbar} />        
+          {sector === 'relay' && <Relay />} 
+          {sector === 'matrix' && <Matrix />}        
       </main>
     </div>
   );
