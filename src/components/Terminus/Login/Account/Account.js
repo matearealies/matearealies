@@ -20,17 +20,19 @@ export function Account(props) {
                 })
                 .then((myJson) => {
                     console.log(myJson);
-                });
+                })
         }        
-    });
-    return (
+    })/*
+    _     _  _    _|_ _ 
+   (/_>< (/_(_ |_| |_(/_
+  */return (
         <>
             <Grid container spacing={3}>
                 <Grid item xs={5}>     
                     
                 </Grid>
                 <Grid item xs={2}>     
-                    <Avatar alt="Remy Sharp" src={profileToken.Pt.QK} className={classes.large} />       
+                    <Avatar alt="Remy Sharp" src={(profileToken.Pt && profileToken.Pt.QK) || (profileToken.Tt && profileToken.Tt.SK)} className={classes.large} />       
                 </Grid>
                 <Grid item xs={5}>     
                     

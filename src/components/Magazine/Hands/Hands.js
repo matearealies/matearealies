@@ -76,7 +76,9 @@ function Hands (props) {
     function gotoAlbum() {
         
     }
-
+    /*__/    _  _     _/_  _ 
+  _(/_ /(___(/_(__(_(_(___(/_
+     */ 
     return (
         <>   
             <IconButton className={classes.fabLeft} onClick={toggleDrawer('left', true)}>

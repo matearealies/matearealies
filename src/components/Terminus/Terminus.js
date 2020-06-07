@@ -1,11 +1,13 @@
-import React, { useEffect, useState, useGlobal, useRef } from 'reactn'
+import React, { useState, useGlobal} from 'reactn'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
-import { AppBar, Avatar, Button, CssBaseline, Divider, Drawer, Fab, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, TextField, Toolbar, Typography } from '@material-ui/core'
 import clsx from 'clsx';
-import { AccessPointNetwork, ChevronLeft, ChevronRight, Creation, Inbox, LoginVariant, Mail, Menu } from 'mdi-material-ui';
+import { ChevronLeft, ChevronRight, CubeUnfolded, FormatTitle, HeadLightbulbOutline, Menu, MessageTextOutline, Rss,  } from 'mdi-material-ui';
 import { Login } from './Login/'
-import { Relay } from '../Relay/'
+import { Syndicate } from '../Syndicate'
 import { Matrix } from '../Matrix/'
+import { Note } from '../Note'
+import { LeveL } from '../Matrix/LeveL/LeveL'
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
   brandText: {
     flexGrow: 1,
     fontFamily: 'monospace',
+    position: 'relative',
     whiteSpace: 'pre'
   },
   content: {
@@ -63,20 +66,17 @@ const useStyles = makeStyles((theme) => ({
       width: theme.spacing(9) + 1,
     },
   },
-  fab: {
-    position: 'absolute',
-    bottom: theme.spacing(3),
-    right: theme.spacing(3),
-    color: 'darkslateblue'
-  },
   hide: {
     display: 'none',
+  },
+  login: {
+    paddingRight: theme.spacing(3)
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   spacer: {
-    marginTop: theme.spacing(7)
+    marginTop: theme.spacing(8)
   },
   title: {
     flexGrow: 1,
@@ -89,41 +89,67 @@ const useStyles = makeStyles((theme) => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },  
-}));
+}))
 
 function MiniDrawer() {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = useState(false);    
-  const [sector, setSector] = useState('');
-
+  const classes = useStyles()
+  const theme = useTheme()
+  const [open, setOpen] = useState(false)  
+  const [sector, setSector] = useGlobal('sector');
   const [profileToken, setProfileToken] = useGlobal('profileToken')
   const handleDrawerOpen = () => { setOpen(true) }
-  const handleDrawerClose = () => { setOpen(false) }  
-  
+  const handleDrawerClose = () => { setOpen(false) }
 
   function Options() {
     if (profileToken) {
       return (<>
-      <List>
-        <ListItem button key='relay' onClick={() => setSector('relay')}>
-          <ListItemIcon><AccessPointNetwork/></ListItemIcon>
-          <ListItemText primary="Relay" />
-        </ListItem>
-      </List>        
-      <Divider />
-      <List>
-        <ListItem button key='matrix' onClick={() => setSector('matrix')}>
-          <ListItemIcon><Creation/></ListItemIcon>
-          <ListItemText primary="Matrix" />
-        </ListItem>
-      </List>
-      </>);
+        <List>
+          <ListItem button key='matrix' onClick={() => setSector('matrix')}>
+            <ListItemIcon><CubeUnfolded/></ListItemIcon>
+            <ListItemText primary="Matrix" />
+          </ListItem>
+        </List>
+        <Divider />
+        <List>
+          <ListItem button key='message' onClick={() => setSector('message')}>
+            <ListItemIcon><MessageTextOutline /></ListItemIcon>
+            <ListItemText primary="Messages" />
+          </ListItem>
+        </List>  
+        <List>
+          <ListItem button key='note' onClick={() => setSector('note')}>
+            <ListItemIcon><HeadLightbulbOutline /></ListItemIcon>
+            <ListItemText primary="Notes" />
+          </ListItem>
+        </List>  
+        <Divider />
+        <List>
+          <ListItem button key='syndicate' onClick={() => setSector('syndicate')}>
+            <ListItemIcon><Rss/></ListItemIcon>
+            <ListItemText primary="Syndicate" />
+          </ListItem>
+        </List>        
+      </>)
     }
     return <></>;
   }
 
-  return (
+  function LeveLOptions() {
+    if (profileToken) {
+      return (<>
+        <List>
+          <ListItem >
+            <ListItemIcon><FormatTitle/></ListItemIcon>
+            <TextField id="title" label="Title" />
+          </ListItem>
+        </List>
+      </>)
+    }
+    return <></>;
+  }/*
+   _     _  _    _|_ _ 
+  (/_>< (/_(_ |_| |_(/_
+*/return (
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
@@ -144,19 +170,19 @@ function MiniDrawer() {
           >
             <Menu />
           </IconButton>
+          <Login />
+          :   :
           <Typography
               className={classes.brandText}
-              color="primary">       
-               __    _   ___/   ___/               _                         <br/>
-               |\   |  .'  /\ .'  /\   ____ \,___, /        ___  .___    ___ <br/>
-               | \  |  |  / | |  / |  (     |    \ |,---. .'   ` /   \ .'   `<br/>
-               |  \ |  |,'  | |,'  |  `--.  |    | |'   ` |----' |   ' |----'<br/>
-               |   \|  /`---' /`---' \___.' |`---' /    | `.___, /     `.___,<br/>
-                                            \                                 
-          </Typography>                                                                                                                                                 
-          <IconButton color="primary" className={classes.fab} >
-            <LoginVariant />  
-          </IconButton>
+              color="primary">    
+              888b    |   ,88~~\     ,88~~\                    888                                <br/> 
+              |Y88b   |  d888   \   d888   \   d88~\ 888-~88e  888-~88e  e88~~8e  888-~\  e88~~8e <br/>
+              | Y88b  | 88888    | 88888    | C888   888  888b 888  888 d888  88b 888    d888  88b<br/>
+              |  Y88b | 88888    | 88888    |  Y88b  888  8888 888  888 8888__888 888    8888__888<br/>
+              |   Y88b|  Y888   /   Y888   /    888D 888  888P 888  888 Y888    , 888    Y888    ,<br/>
+              |    Y888   `88__/     `88__/   \_88P  888-_88"  888  888  "88___/  888     "88___/ <br/>
+              |                                      888<br/>                      
+          </Typography>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -183,9 +209,11 @@ function MiniDrawer() {
         <Options />
       </Drawer>
       <main className={classes.content}>
-        <div className={classes.toolbar} />        
-          {sector === 'relay' && <Relay />} 
-          {sector === 'matrix' && <Matrix />}        
+        <div className={classes.toolbar} />       
+          {sector === 'matrix' && <Matrix />}               
+          {sector === 'note' && <Note />}  
+          {sector === 'syndicate' && <Syndicate />}  
+          {sector === 'level' && <LeveL /> }   
       </main>
     </div>
   );
@@ -193,7 +221,7 @@ function MiniDrawer() {
 
 export function Terminus(props) {
     return (
-        // <ButtonAppBar />
         <MiniDrawer />
     )
 }
+export default Terminus

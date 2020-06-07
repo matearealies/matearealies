@@ -1,0 +1,2 @@
+export { Syndicate } from './Syndicate'
+

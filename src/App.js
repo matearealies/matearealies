@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { HashRouter, Route, Switch } from "react-router-dom";
-import Magazine from "./components/Magazine/Magazine";
+import { Magazine } from "./components/Magazine/Magazine";
 import { Terminus } from "./components/Terminus/Terminus";
 import 'typeface-roboto';
 // import { CreampieCathy } from "./components/Sites";
