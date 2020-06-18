@@ -109,7 +109,7 @@ function AddDialog (props) {
   const [sector, setSector] = useGlobal('sector')
   const [LeveLUuid, setLeveLUuid] = useGlobal('LeveLUuid')
   const [spreadsheetId, setSpreadsheetId] = useGlobal('spreadsheetId')
-  const [titleRange, setTitleRange] = useGlobal('titleRange')
+  const [tableRange, setTableRange] = useGlobal('tableRange')
   
 
   const change = (event) => {
@@ -134,15 +134,17 @@ function AddDialog (props) {
       "spreadsheetId": spreadsheetId,
       "range": "A1",
       "insertDataOption": "INSERT_ROWS",
-      "valueInputOption": "RAW",
+      "valueInputOption": "RAW",      
       "resource": {
-        "values": [[uuid()]]
+        "values": [[uuid()]],
+        "majorDimension": "ROWS"
       }
     }).then(function(response) { // Handle the results here (response.result has the parsed body).
-      let titleTableRange = response.result.tableRange.split(':')[1]
-      console.log(titleTableRange)
-      console.log(titleTableRange.slice(0, 1) + (Number(titleTableRange.slice(1)) + 1))
-      setTitleRange(titleTableRange.slice(0, 1) + (Number(titleTableRange.slice(1)) + 1))
+      console.log(response)
+      let tableRange = response.result.tableRange.split(':')[1]
+      // console.log(tableRange)
+      console.log((Number(tableRange.slice(1)) + 1))
+      setTableRange((Number(tableRange.slice(1)) + 1))
     },
     function(err) { console.error("Execute error", err); })
   } 

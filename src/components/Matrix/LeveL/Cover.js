@@ -34,15 +34,16 @@ export function Cover (props) {
   const [title, setTitle] = useState('')
   const [characters, setCharacters] = useState([])
   const [spreadsheetId, setSpreadsheetId] = useGlobal('spreadsheetId')
-  const [titleRange, setTitleRange] = useGlobal('titleRange')
+  const [tableRange, setTableRange] = useGlobal('tableRange')
 
   const handleTitleSave = () => {
+    console.log(title, tableRange)
     return window.gapi.client.sheets.spreadsheets.values.batchUpdate({
       "spreadsheetId": spreadsheetId,
       "resource": {
         "valueInputOption": "RAW",
         "data": [{
-          "range": titleRange,
+          "range": "B" + tableRange,
           "values": [[title]]
         }]
       }
@@ -118,10 +119,10 @@ export function Cover (props) {
           title="Paella dish"
         />
         <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
+          {/* <Typography variant="body2" color="textSecondary" component="p">
             This impressive paella is a perfect party dish and a fun meal to cook together with your
             guests. Add 1 cup of frozen peas along with the mussels, if you like.
-          </Typography>
+          </Typography> */}
         </CardContent>        
       </Card>      
     </>

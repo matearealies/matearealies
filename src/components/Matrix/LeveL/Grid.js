@@ -1,8 +1,9 @@
-import React, { useState, useGlobal, memo }  from "reactn"
+import React, { useState, useGlobal, memo, useCallback }  from "reactn"
 import arrayMove from "array-move";
 import Gallery from "react-photo-gallery";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import Photo from "./Photo";
+import SelectedImage from "./SelectedImage";
 
 
 /* popout the browser and maximize to see more rows! -> */

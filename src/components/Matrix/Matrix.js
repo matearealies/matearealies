@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useGlobal } from 'reactn'
 import { makeStyles } from '@material-ui/core/styles';
 import { Add } from './LeveL/Add'
+import { Avatar, Card, CardActionArea, CardContent, CardHeader, CardMedia, Grid } from '@material-ui/core';
 // import { loadClient } from '../Cloud/Google/api'
 
 const useStyles = makeStyles((theme) => ({
@@ -32,8 +33,9 @@ const useStyles = makeStyles((theme) => ({
 export function Matrix(props) {
   const classes = useStyles();
   const [profileToken, setProfileToken] = useGlobal('profileToken')
-  const [worlds, setWorlds] = useState('world')
   const [spreadsheetId, setSpreadsheetId] = useGlobal('spreadsheetId')
+  const [worlds, setWorlds] = useState([])
+  
 
   function createMatrix () {
     return window.gapi.client.sheets.spreadsheets.create({
@@ -94,12 +96,15 @@ export function Matrix(props) {
         window.gapi.client.sheets.spreadsheets.get({
           "spreadsheetId": matrix.id,
           "includeGridData": true,
-          "ranges": [
-            "A1"
-          ]
         }).then(function(response) {
                     // Handle the results here (response.result has the parsed body).
-          console.log("Response", response);
+          let cards = response.result.sheets[0].data[0].rowData.reduce((accumulator, currentValue) => {
+            if (currentValue.values[0].formattedValue !== undefined) {
+              accumulator.push({id: currentValue.values[0].formattedValue, name: currentValue.values[1].formattedValue})              
+            }
+            return accumulator
+          }, []);
+          setWorlds(cards)
         },
         function(err) { console.error("Execute error", err); });
       })
@@ -108,7 +113,35 @@ export function Matrix(props) {
     
   }, []); // Only re-run the effect if count changes
 
+  function Worlds(props) {
+    if (props.worlds.length > 0) {
+      return (<Grid container className={classes.root} spacing={2}>
+        <Grid item xs={12}>
+          <Grid container justify="center" spacing={2}>
+            {worlds.map((card) => (
+              <Grid key={card.id} item>
+                <Card className={classes.paper}>
+                <CardHeader
+                  avatar={
+                    <Avatar aria-label="recipe" className={classes.avatar}>
+                      R
+                    </Avatar>
+                  }                
+                  title={card.name}
+                  subheader="September 14, 2016"
+                /> 
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Grid>
+      </Grid>)
+    }
+    return (null)
+  }
+  
   return (<>
+    <Worlds worlds={worlds} />
     <Add/>
   </>)
 }
